@@ -533,7 +533,8 @@ http://kitenet.net/~joey/code/mr/
 use warnings;
 use strict;
 use Getopt::Long;
-use Cwd qw(getcwd abs_path);
+use Cwd qw(getcwd abs_path chdir);
+use File::Basename;
 
 # things that can happen when mr runs a command
 use constant {
@@ -1437,8 +1438,19 @@ sub loadconfig {
 		}
 	}
 
+	my $oldDir = getcwd();
+	my $newDir;
+	my $configName;
 	foreach my $c (@toload) {
-		loadconfig(@$c);
+		$newDir = dirname(@$c);
+		$configName = basename(@$c);
+		if (chdir($newDir)) {
+			loadconfig($configName);
+			chdir($oldDir);
+		}
+		else {
+			print STDERR "mr: failed to switch to directory of chained config.\n";
+		}
 	}
 }
 

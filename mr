@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 =head1 NAME
 
@@ -1326,11 +1326,12 @@ sub loadconfig {
 	while (@lines) {
 		$_=$nextline->();
 
+		next if /^\s*\#/ || /^\s*$/;
+
 		if (! $trusted && /[[:cntrl:]]/) {
 			$trusterror->("illegal control character");
 		}
 
-		next if /^\s*\#/ || /^\s*$/;
 		if (/^\[([^\]]*)\]\s*$/) {
 			$section=$1;
 

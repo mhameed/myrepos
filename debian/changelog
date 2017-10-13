@@ -1,3 +1,127 @@
+myrepos (1.20170130) UNRELEASED; urgency=medium
+
+  * Fix undefined value warning when using -j.
+
+ -- Joey Hess <id@joeyh.name>  Wed, 17 May 2017 12:07:26 -0400
+
+myrepos (1.20170129) unstable; urgency=medium
+
+  * Strip .git extension when registering vsch repositories.
+    Thanks, Don March
+  * Disable git pager when mr status runs git stash list.
+  * Added stow library. This lets dotfiles in repositories managed by mr
+    be symlinked into the home directory by GNU stow.
+    Thanks, Sean Whitton and Adam Spiers.
+  * cvs_status: do not fail when all files are up to date.
+    Thanks, Paul Wise.
+  * Added dgit plugin.
+    Thanks, Sean Whitton.
+
+ -- Joey Hess <id@joeyh.name>  Sun, 29 Jan 2017 14:14:19 -0400
+
+myrepos (1.20160122) unstable; urgency=medium
+
+  * Fix one missing call to safe_abs_path.
+    Thanks, Chris Arndt
+
+ -- Joey Hess <id@joeyh.name>  Fri, 22 Jan 2016 18:44:56 -0400
+
+myrepos (1.20151206) unstable; urgency=medium
+
+  [ Paul Wise]
+  * Improve output handling
+  * Clean up debian/control
+  * Fix typos
+
+ -- Richard Hartmann <richih@debian.org>  Sun, 06 Dec 2015 07:11:40 +0100
+
+myrepos (1.20151101) unstable; urgency=medium
+
+  * Allow running of mr via `mr --force-env` when within vcsh context via
+    `vcsh enter foo`. Closes: #786736
+
+ -- Richard Hartmann <richih@debian.org>  Sun, 01 Nov 2015 22:17:34 +0100
+
+myrepos (1.20151023) unstable; urgency=medium
+
+  * hg push exits 1 on non-error, apparently only 255 is used for actual errors.
+    Deal with this unusual behavior. Thanks, Ivan Perez.
+  * Work when HOME is a symlink. Closes: #793381
+
+ -- Joey Hess <id@joeyh.name>  Sun, 08 Nov 2015 12:07:00 -0400
+
+myrepos (1.20151022) unstable; urgency=medium
+
+  * mr status in a git repo now includes git stash list in the output,
+    to remind you if you have any stashes. If your workflow involves
+    making lots of stashes and not cleaning them up, you may be better served
+    by switching from "git stash apply" to "git stash pop". Of course,
+    you can also override git_status in your mrconfig file and remove the
+    stash list.
+  * Fix bootstrap from local source files.
+    Thanks, Fabrice Benhamouda.
+  * Pass user-specified command-line arguments to mr fetch commands too.
+    Thanks, Paul Wise.
+  * Make output continuous in minimal mode when there is only one job.
+    Thanks, Paul Wise.
+  * Simplify mr help by using perldoc, rather than man.
+  * On some platforms, abs_path crashes when the file does not exist.
+    Wrap it for safety.
+
+ -- Joey Hess <id@joeyh.name>  Thu, 22 Oct 2015 00:49:29 -0400
+
+myrepos (1.20150503) unstable; urgency=medium
+
+  [ Joey Hess ]
+  * Rework help command to work on OpenBSD.
+
+  [ Richard Hartmann ]
+  * Check if unsafe ENV variables are set
+  * Add support for setting jobs via config file
+  * Add support for fossil >= 1.23
+  * Bump Standards-Version to 3.9.6
+
+ -- Richard Hartmann <richih@debian.org>  Sun, 03 May 2015 20:57:08 +0200
+
+myrepos (1.20141024.1) unstable; urgency=medium
+
+  * Taking over package maintenance from Joey. This sucks.
+
+ -- Richard Hartmann <richih@debian.org>  Sun, 09 Nov 2014 23:56:02 +0100
+
+myrepos (1.20141024) unstable; urgency=medium
+
+  * Fix name for vcsh_clean. Closes: #766655
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 24 Oct 2014 13:10:50 -0400
+
+myrepos (1.20141023) unstable; urgency=medium
+
+  * Add darcs grep command using ack-grep.
+    Thanks, Paul Wise.
+  * Add a clean command.
+    Thanks, Paul Wise. Closes: #702685
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 23 Oct 2014 22:17:25 -0400
+
+myrepos (1.20140831.1) unstable; urgency=medium
+
+  * Fix breakage introduced by --minimal patch.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 31 Aug 2014 14:05:56 -0700
+
+myrepos (1.20140831) unstable; urgency=medium
+
+  * Deal with abs_path change in new version of perl, now it returns undefined
+    when the directory does not exist.
+  * Added --minimal mode. Closes: #694031 Thanks, Paul Wise.
+  * Use libio-pty-easy-perl when available when captuting command output
+    (for --minimal or -jN), so that programs that output color to terminals
+    will be colorized. This is only a recommends as it will fall back to
+    the old method. Thanks, Paul Wise.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 31 Aug 2014 13:20:24 -0700
+
 myrepos (1.20140613) unstable; urgency=medium
 
   * Added lib/git-annex. Thanks, martin f krafft.
@@ -177,7 +301,7 @@ mr (1.04) unstable; urgency=low
 mr (1.03) unstable; urgency=low
 
   * Added git-subtree library. Thanks, Svend Sorensen
-  * Now --quiet supresses all output from commands run, as well
+  * Now --quiet suppresses all output from commands run, as well
     as from mr, unless a command fails. Closes: #529296
 
  -- Joey Hess <joeyh@debian.org>  Sun, 01 May 2011 19:09:35 -0400
@@ -337,7 +461,7 @@ mr (0.37) unstable; urgency=low
 
 mr (0.36) unstable; urgency=low
 
-  * Add webcheckout command. See <http://kitenet.net/~joey/rfc/rel-vcs/>
+  * Add webcheckout command. See <https://joeyh.name/rfc/rel-vcs/>
   * Fix display of repos configured at absolute path locations.
 
  -- Joey Hess <joeyh@debian.org>  Sat, 10 Jan 2009 16:42:07 -0500
@@ -507,7 +631,7 @@ mr (0.15) unstable; urgency=low
     Closes: #452467
 
   [ Joey Hess ]
-  * Add a warning about runing too many jobs at a time.
+  * Add a warning about running too many jobs at a time.
 
  -- Joey Hess <joeyh@debian.org>  Sun, 25 Nov 2007 13:13:47 -0500
 
@@ -564,7 +688,7 @@ mr (0.9) unstable; urgency=low
 
     The old style unsplit actions are still supported, and are what most
     mrconfig files will still use; this change is fully backwards compatible.
-  * Changed some things in the enviroment for the register action.
+  * Changed some things in the environment for the register action.
     It's now run in the directory that the user specifies, and MR_REPO
     is set to contain the basename of the directory that the checkout
     command should check out. These changes should be backware compatible

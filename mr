@@ -1192,10 +1192,12 @@ sub selectrepos {
 			$d.="/" unless $d=~/\/$/;
 			if ($d=~/^\Q$dir\E/) {
 				push @repos, [$dir, $topdir, $subdir];
+				$no_chdir=1;
 				last;
+			} else {
+				push @repos, [$dir, $topdir, $subdir];
 			}
 		}
-		$no_chdir=1;
 	}
 	return @repos;
 }
